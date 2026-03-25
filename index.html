@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Kayalvizhi ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #c2185b;
+    --secondary: #ff8fab;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #1a2a4a, #02050a);
+    color: white;
+}
+
+#stars-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+.main-content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h2 {
+    font-family: 'Dancing Script';
+    font-size: 2.5rem;
+}
+
+/* ENVELOPE */
+#env-stage { position: relative; width: 400px; height: 260px; }
+
+.envelope-wrapper {
+    position: relative;
+    width: 100%; height: 100%;
+    background: var(--secondary);
+    border-radius: 0 0 15px 15px;
+}
+
+.flap {
+    position: absolute;
+    border-width: 150px 200px 0 200px;
+    border-style: solid;
+    border-color: var(--primary) transparent transparent transparent;
+    transform-origin: top;
+    transition: 0.8s;
+    z-index: 20;
+}
+
+.envelope-wrapper::before {
+    content: '';
+    position: absolute;
+    border-width: 130px 0 130px 200px;
+    border-style: solid;
+    border-color: transparent transparent transparent #ffb3c1;
+}
+
+.side-right {
+    position: absolute;
+    right: 0;
+    border-width: 130px 200px 130px 0;
+    border-style: solid;
+    border-color: transparent #ffb3c1 transparent transparent;
+}
+
+.envelope-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    border-width: 0 200px 140px 200px;
+    border-style: solid;
+    border-color: transparent transparent var(--primary) transparent;
+}
+
+/* LETTER */
+.letter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: 260px;
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    padding: 30px;
+
+    transform: translate(-50%, 80%) scale(0.6);
+    opacity: 0;
+
+    z-index: 9999;
+    transition: all 1s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.open .flap { transform: rotateX(180deg); }
+
+.page { display: none; }
+.active { display: block; }
+
+button {
+    margin-top: 30px;
+    padding: 12px 40px;
+    border-radius: 30px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="stars-container"></div>
+
+<div class="main-content">
+    <h2>A message from the stars 💌</h2>
+
+    <div id="env-stage">
+        <div class="envelope-wrapper" id="envelope">
+            <div class="flap"></div>
+            <div class="side-right"></div>
+        </div>
+    </div>
+
+    <div class="letter" id="letter">
+        <div class="page active">Happy Birthday ammuuuuu ❤️</div>
+        <div class="page">i wish i could be there rn, but in few years we'll be celebrating it together ✨</div>
+        <div class="page">I love you forever 💖 and ipo konjam greedy ah 60 varsham polaam nu iruku, epdi irundhaalum neenga dhaaan, i luvvvvvv youuuuuu 💖</div>
+    </div>
+
+    <button onclick="nextStep()">Next</button>
+</div>
+
+<script>
+let step = 0;
+let pages = document.querySelectorAll('.page');
+
+function nextStep() {
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('letter');
+
+    if (step === 0) {
+        envelope.classList.add('open');
+        letter.style.opacity = 1;
+        letter.style.transform = "translate(-50%, -50%) scale(1.1)";
+    } else if (step < pages.length) {
+        pages[step-1].classList.remove('active');
+        pages[step].classList.add('active');
+    }
+    step++;
+}
+
+/* stars */
+const container = document.getElementById('stars-container');
+for (let i = 0; i < 120; i++) {
+    let star = document.createElement('div');
+    star.className = 'star';
+    star.style.width = Math.random()*2+'px';
+    star.style.height = star.style.width;
+    star.style.left = Math.random()*100+'vw';
+    star.style.top = Math.random()*100+'vh';
+    container.appendChild(star);
+}
+</script>
+
+</body>
+</html>
